@@ -7,9 +7,16 @@ import 'package:http/http.dart' as http;
 
 class NetworkApiServices extends BaseApiServices {
   @override
-  Future getResponse(String uri) {
-    // TODO: implement getResponse
-    throw UnimplementedError();
+  Future getResponse(String uri) async {
+    dynamic responseJson;
+    try {
+      final response =
+          await http.post(Uri.parse(uri)).timeout(Duration(seconds: 10));
+      responseJson = returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet Connection');
+    }
+    return responseJson;
   }
 
   @override
