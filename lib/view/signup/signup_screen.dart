@@ -1,19 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mvmm_provider_demo/res/componets/round_button.dart';
 import 'package:mvmm_provider_demo/utils/utils.dart';
-import 'package:mvmm_provider_demo/view/signup/signup_screen.dart';
 import 'package:mvmm_provider_demo/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
+class SignupScreen extends StatelessWidget {
+  SignupScreen({super.key});
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _passwordFocusNode = FocusNode();
@@ -21,16 +13,11 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emaailFocusNode = FocusNode();
 
   final _showPassword = ValueNotifier<bool>(true);
-
   @override
   Widget build(BuildContext context) {
-    // final _loginScreenModel = Provider.of<LoginScreenModel>(context);
-    if (kDebugMode) {
-      print('build');
-    }
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Sign Up'),
         // centerTitle: true,
       ),
       body: Center(
@@ -71,11 +58,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         // autofocus: true,
                         focusNode: _passwordFocusNode,
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please Enter the right Password';
-                          } else if (value.length <= 6) {
-                            return 'Please Enter 6 digit Password';
-                          }
+                          // if (value!.isEmpty) {
+                          //   return 'Please Enter the right Password';
+                          // } else if (value.length <= 6) {
+                          //   return 'Please Enter 6 digit Password';
+                          // }
                           return null;
                         },
                         controller: _passwordController,
@@ -95,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     : Icons.visibility_off)),
                             border: const OutlineInputBorder(),
                             hintText: 'Password',
-                            prefixIcon: Icon(Icons.password)),
+                            prefixIcon: const Icon(Icons.password)),
                       ),
                     ),
                   ],
@@ -111,28 +98,24 @@ class _LoginScreenState extends State<LoginScreen> {
                         "email": _emailController.text.toString(),
                         "password": _passwordController.text.toString()
                       };
-                      value.loginApi(
+                      value.signUpApi(
                           data, context, _emailController, _passwordController);
                     }
                   },
                   // loading: false,
-                  title: 'Login',
+                  title: 'Sign Up',
                 ),
               ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Don\'t have an account?'),
+                  const Text('Alrady have an account?'),
                   TextButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignupScreen(),
-                            ));
+                        Navigator.pop(context);
                       },
-                      child: const Text('Sign Up')),
+                      child: const Text('Login')),
                 ],
               )
             ],

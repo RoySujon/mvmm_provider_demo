@@ -5,9 +5,26 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //argument pass from Navigator.PushNamed=====>
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Screen'),
+        title: Text(args['value']['id'].toString()),
+      ),
+      body: Center(
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              child: Container(
+                height: 10,
+              ),
+            )
+
+            // Text(data);
+          ],
+        ),
       ),
     );
   }

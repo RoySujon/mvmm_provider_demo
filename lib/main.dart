@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mvmm_provider_demo/res/cololors.dart';
+import 'package:mvmm_provider_demo/utils/routes/routes.dart';
+import 'package:mvmm_provider_demo/utils/routes/routes_name.dart';
 import 'package:mvmm_provider_demo/view/login/login_screen.dart';
-import 'package:mvmm_provider_demo/view_model/login/login_screen_model.dart';
+import 'package:mvmm_provider_demo/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -17,10 +19,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => LoginScreenModel(),
+          create: (context) => AuthViewModel(),
         )
       ],
       child: MaterialApp(
+        routes: AppRoutes.routes(),
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -35,7 +38,7 @@ class MyApp extends StatelessWidget {
               seedColor: AppColor.kMainColor, primary: AppColor.kMainColor),
           // useMaterial3: true,
         ),
-        home: const LoginScreen(),
+        // home: LoginScreen(),
       ),
     );
   }
