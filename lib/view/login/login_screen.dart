@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvmm_provider_demo/res/componets/round_button.dart';
 import 'package:mvmm_provider_demo/utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -44,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       autofocus: true,
                       focusNode: _emaailFocusNode,
                       validator: (value) {
-                        if (value == '') {
+                        if (value!.isEmpty) {
                           return 'Enter the right email';
                         }
                         return null;
@@ -67,8 +68,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         // autofocus: true,
                         focusNode: _passwordFocusNode,
                         validator: (value) {
-                          if (value == '') {
-                            return 'Enter the right Password';
+                          if (value!.isEmpty) {
+                            return 'Please Enter the right Password';
+                          } else if (value.length <= 6) {
+                            return 'Please Enter 6 digit Password';
                           }
                           return null;
                         },
@@ -96,15 +99,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 30),
-              MaterialButton(
-                minWidth: double.infinity,
-                color: Colors.black,
-                textColor: Colors.white,
-                onPressed: () {
+              RoundButton(
+                onTap: () {
                   if (_formKey.currentState!.validate()) {}
                 },
-                child: const Text('Login'),
-              )
+                // loading: false,
+                title: 'Login',
+              ),
             ],
           ),
         ),
