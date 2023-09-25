@@ -11,23 +11,25 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
   final _passwordFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
-
   final _emaailFocusNode = FocusNode();
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
 
-    // _emaailFocusNode.nextFocus();
-  }
+  final _showPassword = ValueNotifier<bool>(true);
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   _emaailFocusNode.dispose();
+  //   _passwordFocusNode.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Login'),
+        // centerTitle: true,
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -59,24 +61,36 @@ class _LoginScreenState extends State<LoginScreen> {
                           hintText: 'Email'),
                     ),
                     const SizedBox(height: 20),
-                    TextFormField(
-                      // autofocus: true,
-                      focusNode: _passwordFocusNode,
-                      validator: (value) {
-                        if (value == '') {
-                          return 'Enter the right Password';
-                        }
-                        return null;
-                      },
-                      controller: _passwordController,
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                              onPressed: () {}, icon: Icon(Icons.abc)),
-                          border: OutlineInputBorder(),
-                          hintText: 'Password',
-                          prefixIcon: Icon(Icons.password)),
+                    ValueListenableBuilder(
+                      valueListenable: _showPassword,
+                      builder: (context, value, child) => TextFormField(
+                        // autofocus: true,
+                        focusNode: _passwordFocusNode,
+                        validator: (value) {
+                          if (value == '') {
+                            return 'Enter the right Password';
+                          }
+                          return null;
+                        },
+                        controller: _passwordController,
+                        obscureText: _showPassword.value,
+                        keyboardType: TextInputType.visiblePassword,
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  if (_showPassword.value == true) {
+                                    _showPassword.value = false;
+                                  } else {
+                                    _showPassword.value = true;
+                                  }
+                                },
+                                icon: Icon(_showPassword.value == true
+                                    ? Icons.visibility
+                                    : Icons.visibility_off)),
+                            border: OutlineInputBorder(),
+                            hintText: 'Password',
+                            prefixIcon: Icon(Icons.password)),
+                      ),
                     ),
                   ],
                 ),
