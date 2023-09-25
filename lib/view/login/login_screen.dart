@@ -11,7 +11,19 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  final _passwordFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
+
+  final _emaailFocusNode = FocusNode();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    // _emaailFocusNode.nextFocus();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,18 +39,29 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     TextFormField(
+                      autofocus: true,
+                      focusNode: _emaailFocusNode,
                       validator: (value) {
                         if (value == '') {
                           return 'Enter the right email';
                         }
                         return null;
                       },
+                      onFieldSubmitted: (value) {
+                        Utils.fieldFocusNode(
+                            _emaailFocusNode, _passwordFocusNode, context);
+                      },
                       controller: _emailController,
-                      decoration:
-                          const InputDecoration(border: OutlineInputBorder()),
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.email_outlined),
+                          border: OutlineInputBorder(),
+                          hintText: 'Email'),
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
+                      // autofocus: true,
+                      focusNode: _passwordFocusNode,
                       validator: (value) {
                         if (value == '') {
                           return 'Enter the right Password';
@@ -47,8 +70,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       controller: _passwordController,
                       obscureText: true,
-                      decoration:
-                          const InputDecoration(border: OutlineInputBorder()),
+                      keyboardType: TextInputType.visiblePassword,
+                      decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                              onPressed: () {}, icon: Icon(Icons.abc)),
+                          border: OutlineInputBorder(),
+                          hintText: 'Password',
+                          prefixIcon: Icon(Icons.password)),
                     ),
                   ],
                 ),
