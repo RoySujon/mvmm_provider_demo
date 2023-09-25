@@ -11,7 +11,7 @@ class NetworkApiServices extends BaseApiServices {
     dynamic responseJson;
     try {
       final response =
-          await http.post(Uri.parse(uri)).timeout(Duration(seconds: 10));
+          await http.post(Uri.parse(uri)).timeout(const Duration(seconds: 10));
       responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet Connection');
@@ -25,7 +25,7 @@ class NetworkApiServices extends BaseApiServices {
     try {
       final response = await http
           .post(Uri.parse(uri), body: data)
-          .timeout(Duration(seconds: 10));
+          .timeout(const Duration(seconds: 10));
       responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet Connection');

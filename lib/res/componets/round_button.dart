@@ -15,14 +15,14 @@ class RoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-            minimumSize: Size(200, 50),
+            minimumSize: const Size(200, 50),
             elevation: 0,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(100)),
-            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30)),
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30)),
         onPressed: onTap,
         child: loading
-            ? Container(
+            ? const SizedBox(
                 height: 25,
                 width: 25,
                 child: CircularProgressIndicator(

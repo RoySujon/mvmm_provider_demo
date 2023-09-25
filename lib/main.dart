@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mvmm_provider_demo/res/cololors.dart';
 import 'package:mvmm_provider_demo/utils/routes/routes.dart';
-import 'package:mvmm_provider_demo/utils/routes/routes_name.dart';
-import 'package:mvmm_provider_demo/view/login/login_screen.dart';
+// import 'package:mvmm_provider_demo/utils/routes/routes_name.dart';
+// import 'package:mvmm_provider_demo/view/login/login_screen.dart';
 import 'package:mvmm_provider_demo/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 

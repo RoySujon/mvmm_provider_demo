@@ -34,10 +34,13 @@ class AuthViewModel extends ChangeNotifier {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeScreen(),
+              builder: (context) => const HomeScreen(),
             ));
         Utils.flushbarErrorMessage(
-            context, 'Login Success : ' + value['token']);
+            // ignore: prefer_interpolation_to_compose_strings
+            context,
+            // ignore: prefer_interpolation_to_compose_strings
+            "Login Success : " + value['token'].toString());
       }
     }).onError((error, stackTrace) {
       setLoading(false);
@@ -68,11 +71,13 @@ class AuthViewModel extends ChangeNotifier {
       if (kDebugMode) {
         print(value.toString());
 
-        Navigator.pushNamed(context, RoutesName.homeScreen,
-            arguments: ArgumentPass.arguments(value));
+        Navigator.pushNamed(
+          context, RoutesName.homeScreen,
 
-        Utils.flushbarErrorMessage(
-            context, 'Sign Up Success : ' + value['id'].toString());
+          // arguments: ArgumentPass.arguments(value)
+        );
+
+        Utils.flushbarErrorMessage(context, 'Sign Up Success : ${value['id']}');
       }
     }).onError((error, stackTrace) {
       setLoading(false);
@@ -86,9 +91,9 @@ class AuthViewModel extends ChangeNotifier {
   }
 }
 
-class ArgumentPass {
-  static Map<String, dynamic> arguments(var value) => {
-        'message': 'Sucessfull',
-        'value': value,
-      };
-}
+// class ArgumentPass {
+//   static Map<String, dynamic> arguments(var value) => {
+//         'message': 'Sucessfull',
+//         'value': value,
+//       };
+// }

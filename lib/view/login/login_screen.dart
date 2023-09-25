@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     : Icons.visibility_off)),
                             border: const OutlineInputBorder(),
                             hintText: 'Password',
-                            prefixIcon: Icon(Icons.password)),
+                            prefixIcon: const Icon(Icons.password)),
                       ),
                     ),
                   ],
