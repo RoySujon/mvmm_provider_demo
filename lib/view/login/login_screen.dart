@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mvmm_provider_demo/res/componets/round_button.dart';
 import 'package:mvmm_provider_demo/utils/utils.dart';
+import 'package:mvmm_provider_demo/view_model/login/login_screen_model.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -26,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _loginScreenModel = Provider.of<LoginScreenModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
@@ -101,7 +104,13 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 30),
               RoundButton(
                 onTap: () {
-                  if (_formKey.currentState!.validate()) {}
+                  if (_formKey.currentState!.validate()) {
+                    Map data = {
+                      "email": _emailController.text.toString(),
+                      "password": _passwordController.text.toString()
+                    };
+                    _loginScreenModel.loginApi(data, context);
+                  }
                 },
                 // loading: false,
                 title: 'Login',

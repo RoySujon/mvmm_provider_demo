@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:another_flushbar/flushbar_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mvmm_provider_demo/res/cololors.dart';
 
 class Utils {
   static toastMessage(String message) {
@@ -20,10 +21,10 @@ class Utils {
         duration: const Duration(seconds: 3),
         borderRadius: BorderRadius.circular(30),
         flushbarPosition: FlushbarPosition.TOP,
-        backgroundColor: Colors.red,
+        backgroundColor: AppColor.kBackgroundColor,
         reverseAnimationCurve: Curves.easeInOut,
         positionOffset: 28,
-        icon: const Icon(Icons.error, size: 28, color: Colors.white),
+        icon: const Icon(Icons.error, size: 28, color: AppColor.kTextColor),
       )..show(context),
     );
   }
